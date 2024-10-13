@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>
+   Chat Bot
+  </title>
+<!-- Bootstrap CSS -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+<meta content="noindex, nofollow" name="robots"/>
+<meta content="noindex, nofollow" name="robots"/></head>
+<body>
+<div class="container mt-5">
+<h1 class="text-center">
+    Chat Bot
+   </h1>
+<div class="chat-box border rounded p-3" id="chatBox">
+<div class="mb-3" id="messages">
+</div>
+<input class="form-control" id="userInput" placeholder="Type your message here..." type="text"/>
+<button class="btn btn-primary mt-2" id="sendBtn">
+     Send
+    </button>
+</div>
+</div>
+<!-- Bootstrap & jQuery JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+</script>
+</body>
+</html>
+
+
+<style>
+    body {
+    background-color: #f8f9fa;
+}
+
+.chat-box {
+    background-color: #ffffff;
+    height: 400px;
+    overflow-y: auto;
+}
+
+.message {
+    margin: 10px 0;
+}
+
+.user-message {
+    text-align: right;
+}
+
+.bot-message {
+    text-align: left;
+    color: #007bff;
+}
+</style>
+
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.min.js"></script>
+<script>
+    (function() {
+        window.onload = function() {
+            parent.iframeLoaded();
+        }
+    })();
+    try {
+    $(document).ready(function() {
+    const responses = [
+        "Hey there! How can I help you today?",
+        "I'm here to chat! What's on your mind?",
+        "Hello! Feel free to ask me anything.",
+        "What's up? I'm all ears!",
+        "Hi! How can I assist you?",
+        "You can talk to me about anything!",
+        "I'm here to help, just let me know!",
+        "Hey! What do you want to talk about?",
+        "I'm ready to chat! What's your question?",
+        "Hello! Let's have a conversation."
+    ];
+
+    $('#sendBtn').click(function() {
+        const userInput = $('#userInput').val();
+        if (userInput.trim() !== "") {
+            $('#messages').append(`<div class="message user-message">${userInput}</div>`);
+            $('#userInput').val('');
+
+            // Respond to user input
+            let botResponse = getBotResponse(userInput);
+            $('#messages').append(`<div class="message bot-message">${botResponse}</div>`);
+            $('#chatBox').scrollTop($('#chatBox')[0].scrollHeight);
+        }
+    });
+
+    $('#userInput').keypress(function(e) {
+        if (e.which === 13) { // Enter key
+            $('#sendBtn').click();
+        }
+    });
+
+    function getBotResponse(input) {
+        const lowerInput = input.toLowerCase();
+        if (lowerInput.includes("hey") || lowerInput.includes("hi") || lowerInput.includes("hello")) {
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+        return "I'm not sure how to respond to that. Can you ask something else?";
+    }
+});
+    } catch (e) {
+        console.log("Error in JS code", e);
+    }
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</html>
+    
